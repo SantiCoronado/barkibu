@@ -1,10 +1,5 @@
 **Automatización del proceso de reclamaciones veterinarias en BarKibu**
 
-![David Periscal](media/image1.png){width="1.3541666666666667in"
-height="1.3541666666666667in"}David Periscal
-
-Last updated Apr 21
-
 **🐶 Contexto**
 
 En Barkibu ofrecemos seguros de salud para mascotas. Cuando un pet
@@ -74,29 +69,28 @@ Tu propuesta debería incluir:
 
 > En cuanto a la automatización de la ingesta de datos a través de los
 > documentos que se presentan, suponen varios desafíos:
+> 
+> - ¿Están en formato digital? Si es así se le podría pasar un OCR. Si
+>  llevan anotaciones manuales complica mucho más la ingestión de datos.
+>
+> - Que palabras clave se pueden utilizar para detectar el concepto de los
+>  datos que están siendo procesados.
+>
+> - ¿Hay posibilidad de que el usuario introduzca estos datos manualmente,
+>  previamente a adjuntar los documentos? Siendo así, podríamos con
+>  confianza utilizar cierta información para hacer parte del filtrado.
 
-- ¿Están en formato digital? Si es así se le podría pasar un OCR. Si
-  llevan anotaciones manuales complica mucho más la ingestión de datos.
-
-- Que palabras clave se pueden utilizar para detectar el concepto de los
-  datos que están siendo procesados.
-
-- ¿Hay posibilidad de que el usuario introduzca estos datos manualmente,
-  previamente a adjuntar los documentos? Siendo así, podríamos con
-  confianza utilizar cierta información para hacer parte del filtrado.
-
-**  
-Descomposición del problema**
+**Descomposición del problema**
 
 - Divide el reto en partes más pequeñas y manejables.
 
 > El reto podría ser dividido en cuatro partes;
-
-- tres de ellas se basarían en cada documento aportado: interpretación
-  de factura, informe veterinario e historial clínico.
-
-- La parte de la creación de las condiciones para filtrar las
-  solicitudes.
+>
+> - tres de ellas se basarían en cada documento aportado: interpretación
+>  de factura, informe veterinario e historial clínico.
+>
+> - La parte de la creación de las condiciones para filtrar las
+>  solicitudes.
 
 <!-- -->
 
@@ -113,8 +107,7 @@ Descomposición del problema**
 > probablemente tendría menos prioridad que el resto, dado que es un
 > documento que no siempre se solicita.
 
-**  
-Diseño del sistema**
+**Diseño del sistema**
 
 - Propón una arquitectura o enfoque técnico general para abordar el
   problema.
@@ -131,32 +124,30 @@ Diseño del sistema**
 > La mejor forma de resumir los componentes y etapas del sistema en este
 > momento del proyecto seria probablemente con un diagrama:
 >
-> ![](media/image2.png){width="5.895833333333333in"
-> height="4.802083333333333in"}
+> ![Alt text](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgU29saWNpdHVkIFJlZW1ib2xzbwoKUGV0IFBhcmVudC0-K0FwcCBNb3ZpbDogQ3JlYXIgcwArCAoAEgktPitTZXJ2aWRvABQLZXM6IDw8Y3JlYXRlUmVmdW5kUmVxdWVzdD4-CgAaFC0-K0NSTQBgBgAqCERyYWZ0CkNSTS0tPgBMFgBUBiBjYXNlIABmBmQKZGVhY3RpdmF0ZSBDUk0AVxYtPi0AgU8LAIETBwB1BgCBTQwtPgCCAwo6AIImCGFyIGRhdG9zAF0MAIIeCQCCJRlSZWxsZW4ANAggeSBhZGp1bgBIBW9jcwCCKCVhdHRhY2gAghQHb2NzPj4AgQsgdWQgcmVjaWJpZGEAgRgWAIJzFwCDRglPQ1I6IEFuYWxpcwCDDAhvY3MAgzcKT0NSAIMDGURvY3MANAdkAIJuGACEIhZDaGVjayB1c2UAgmUFYSBhZ2FpbnN0IE9DUgAMBQAgLgCEHQdkZWNpc2lvbiBtYWtpbmcAhG4XAIR_BVNhdgCEeggALgcAhC4YAINUDgCFYAZzcG9uc2UAhDkNLQCEOwxSZXNwdWVzdGEgcgCGawo&s=modern-blue)
 
-**  
-Pros y contras de tu enfoque**
+**Pros y contras de tu enfoque**
 
 - ¿Qué ventajas tiene tu planteamiento?
 
-  - Divide responsabilidades dentro de un contexto lógico.
-
-  - Cualquier estado relevante de la devolución queda guardado en el
-    CRM.
-
-  - El servidor OCR podría entrenarse para que, con más datos, mejorara
-    su análisis.
-
+>  - Divide responsabilidades dentro de un contexto lógico.
+>
+>  - Cualquier estado relevante de la devolución queda guardado en el
+>    CRM.
+>
+>  - El servidor OCR podría entrenarse para que, con más datos, mejorara
+>    su análisis.
+>
 - ¿Dónde podrían surgir problemas o puntos débiles?
 
-  - El programa OCR no es infalible, hay muchas variables de como pueden
-    estar estructurados los documentos/informes.
-
-  - Como parte del proceso de decisión, habría que introducir un estado
-    de decisión a confirmar por un compañero, para evitar falsos
-    positivos/negativos en los casos que no haya un claro resultado de
-    la decisión de la devolución.
-
+>  - El programa OCR no es infalible, hay muchas variables de como pueden
+>    estar estructurados los documentos/informes.
+>
+>  - Como parte del proceso de decisión, habría que introducir un estado
+>    de decisión a confirmar por un compañero, para evitar falsos
+>    positivos/negativos en los casos que no haya un claro resultado de
+>    la decisión de la devolución.
+>
 - ¿Qué alternativas consideraste y por qué descartaste alguna?
 
 > Desgraciadamente no podemos confiar plenamente en el software OCR,
@@ -164,15 +155,14 @@ Pros y contras de tu enfoque**
 > involucrar en parte del proceso, pasos manuales.
 >
 > El impacto de este inconveniente se intenta disminuir con:
+>
+> - esos datos extra que el usuario podría introducir en la app móvil
+>  (importe, fecha, operación/enfermedad);
+>
+> - Los casos dudosos siendo enviados al personal de Barkibu para análisis
+>  manual.
 
-- esos datos extra que el usuario podría introducir en la app móvil
-  (importe, fecha, operación/enfermedad);
-
-- Los casos dudosos siendo enviados al personal de Barkibu para análisis
-  manual.
-
-**  
-Planificación**
+**Planificación**
 
 - ¿Qué pasos seguirías para implementar tu solución?
 
@@ -188,23 +178,23 @@ Planificación**
 
 - ¿Cómo dividirías el trabajo en fases o entregas?
 
-Una primera fase, y luego entregas basadas en CI/CD.
-
-La primera fase cubriría los componentes clave para tener una solución
-funcionando mínimamente. El resto podría implementarse siguiendo CI/CD.
+> Una primera fase, y luego entregas basadas en CI/CD.
+>
+> La primera fase cubriría los componentes clave para tener una solución
+> funcionando mínimamente. El resto podría implementarse siguiendo CI/CD.
 
 - ¿Qué construirías primero y por qué?
 
-Hay un dato muy importante que no está proporcionado en el contexto, y
-es el tiempo que conlleva cada comprobación del equipo de veterinarios.
-A mi parecer, habría que priorizar las tareas que potencialmente ahorren
-más tiempo dividido complejidad o tiempo de desarrollo. A mayor numero
-de la formula anterior, mayor prioridad (dependiendo también del
-contexto).
-
-Aunque está claro que el paso para procesar historiales clínicos
-probablemente tendría menos prioridad que el resto, dado que es un
-documento que no siempre se solicita.
+> Hay un dato muy importante que no está proporcionado en el contexto, y
+> es el tiempo que conlleva cada comprobación del equipo de veterinarios.
+> A mi parecer, habría que priorizar las tareas que potencialmente ahorren
+> más tiempo dividido complejidad o tiempo de desarrollo. A mayor numero
+> de la formula anterior, mayor prioridad (dependiendo también del
+> contexto).
+>
+> Aunque está claro que el paso para procesar historiales clínicos
+> probablemente tendría menos prioridad que el resto, dado que es un
+> documento que no siempre se solicita.
 
 **✨ Bonus**
 
@@ -213,15 +203,15 @@ datos estructurados que se generan a lo largo del proceso para crear
 nuevas funcionalidades o productos que aporten valor a nuestros
 usuarios.
 
-- Se podrían aprovechar los datos existentes de este proceso para
-  analizar nuevas necesidades de mercado: ¿por qué motivo se rechazan
-  más solicitudes de reembolso?  
-  ¿Hay alguna clausula extra que podamos añadir como un servicio para
-  que se cubran las necesidades de los pet parents?
-
-- Tener un buen servicio OCR podría abrir nuevas posibilidades de
-  automatización al resto de Barkibu consiguiendo así que esa inversión
-  tenga un mejor retorno.
+> - Se podrían aprovechar los datos existentes de este proceso para
+>   analizar nuevas necesidades de mercado: ¿por qué motivo se rechazan
+>  más solicitudes de reembolso?  
+>  ¿Hay alguna clausula extra que podamos añadir como un servicio para
+>  que se cubran las necesidades de los pet parents?
+>
+> - Tener un buen servicio OCR podría abrir nuevas posibilidades de
+>  automatización al resto de Barkibu consiguiendo así que esa inversión
+>  tenga un mejor retorno.
 
 **🧪 Formato de entrega**
 
